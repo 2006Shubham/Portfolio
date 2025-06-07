@@ -364,39 +364,31 @@
 </section>
 
 
-
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+document.addEventListener("DOMContentLoaded", () => {
+      const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      if (isTouchDevice) {
+        const cards = document.querySelectorAll(".project-card");
+        cards.forEach(card => {
+          const inner = card.querySelector(".card-inner");
 
-  if (isTouchDevice) {
-    document.querySelectorAll('.project-card').forEach(card => {
-      const innerCard = card.querySelector('.card-inner');
-
-      card.addEventListener('click', function (e) {
-        e.stopPropagation();
-
-        // Close other flipped cards
-        document.querySelectorAll('.card-inner.flipped').forEach(otherCard => {
-          if (otherCard !== innerCard) {
-            otherCard.classList.remove('flipped');
-          }
+          card.addEventListener("click", e => {
+            e.stopPropagation();
+            // Close other flipped cards (if any)
+            document.querySelectorAll(".card-inner.flipped").forEach(other => {
+              if (other !== inner) other.classList.remove("flipped");
+            });
+            // Toggle this card
+            inner.classList.toggle("flipped");
+          });
         });
 
-        // Flip this card
-        innerCard.classList.toggle('flipped');
-      });
+        // Click outside closes all flipped cards
+        document.body.addEventListener("click", () => {
+          document.querySelectorAll(".card-inner.flipped").forEach(card => card.classList.remove("flipped"));
+        });
+      }
     });
-
-    // Tap outside to close
-    document.body.addEventListener('click', function () {
-      document.querySelectorAll('.card-inner.flipped').forEach(card => {
-        card.classList.remove('flipped');
-      });
-    });
-  }
-});
-
 
 document.addEventListener('DOMContentLoaded', function() {
     const menuToggle = document.getElementById('menuToggle');

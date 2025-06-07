@@ -1036,24 +1036,14 @@ nav {
   }
 }
 
-/* Project Cards Mobile Click */
-@media (hover: none) {
-  .project-card:hover .card-inner {
-    transform: none;
-  }
-  
-  .card-inner.flipped {
-    transform: rotateY(180deg);
-  }
-}
+    /* Flip on hover for desktop */
+    @media (hover: hover) and (pointer: fine) {
+      .project-card:hover .card-inner {
+        transform: rotateY(180deg);
+      }
+    }
 
-/* Global mobile flip fix */
-.card-inner.flipped {
-  transform: rotateY(180deg);
-}
-
-@media (hover: none) {
-  .project-card:hover .card-inner {
-    transform: none;
-  }
-}
+    /* Flipped class toggled by JS */
+    .card-inner.flipped {
+      transform: rotateY(180deg);
+    }
