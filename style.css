@@ -12,22 +12,36 @@
     box-sizing: border-box;
 }
 
-/* ===== Desktop Navigation (Original Style) ===== */
+
+
+/* ===== Navigation Container ===== */
 nav {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between; /* Changed from space-around */
     background-color: #0F766E;
-    padding: 7px 0;
+    padding: 7px 20px; /* Added horizontal padding */
     position: sticky;
     top: 0;
     z-index: 100;
+    flex-wrap: nowrap; /* Prevent wrapping */
 }
 
+/* ===== Logo Styles ===== */
+.logo {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: cyan;
+    white-space: nowrap; /* Prevent text wrapping */
+    margin-right: 20px; /* Spacing between logo and nav */
+}
+
+/* ===== Desktop Navigation Links ===== */
 .nav-links {
     display: flex;
     gap: 1.5rem;
     list-style: none;
+    align-items: center;
 }
 
 .nav-links a {
@@ -35,25 +49,21 @@ nav {
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s;
+    white-space: nowrap; /* Prevent text wrapping */
 }
 
 .nav-links li:hover a {
     color: rgb(65, 239, 239);
 }
 
-.logo {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: cyan;
-}
-
-/* ===== Mobile Navigation ===== */
+/* ===== Mobile Menu Button ===== */
 .menu-toggle {
     display: none;
     background: none;
     border: none;
     cursor: pointer;
     padding: 5px;
+    order: 1; /* Moves to far right */
 }
 
 .menu-toggle span {
@@ -65,32 +75,29 @@ nav {
     transition: all 0.3s;
 }
 
-/* Mobile Styles */
+/* ===== Mobile Styles ===== */
 @media (max-width: 768px) {
     nav {
-        justify-content: space-between;
-        padding: 7px 20px;
+        padding: 7px 15px;
+        display: flex;
+        flex-direction: row;
     }
-
-    
     
     .menu-toggle {
         display: block;
-        order: 1;
     }
     
     .nav-links {
         position: fixed;
         top: 50px;
         left: 0;
-        gap: 0rem;
         width: 100%;
         background: #0F766E;
         flex-direction: column;
-        align-items: center;
-        padding: 20px 0;
+        padding: 15px 0;
         clip-path: circle(0px at 90% -10%);
         transition: all 0.5s ease-out;
+        gap: 0;
     }
     
     .nav-links.active {
@@ -100,7 +107,7 @@ nav {
     .nav-links li {
         width: 100%;
         text-align: center;
-        padding: 15px 0;
+        padding: 12px 0;
     }
     
     /* Hamburger Animation */
@@ -116,7 +123,6 @@ nav {
         transform: rotate(-45deg) translate(7px, -6px);
     }
 }
-
 /*Hero section start */
 
 .hero{
@@ -615,8 +621,9 @@ nav {
 @media (max-width: 768px) {
   /* Navigation */
   nav {
-    flex-direction: column;
+    flex-direction: row;
     padding: 10px;
+
     gap: 10px;
   }
   
@@ -1046,3 +1053,5 @@ nav {
     transform: rotateY(180deg);
   }
 }
+
+

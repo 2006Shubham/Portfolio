@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -13,21 +13,18 @@
 <body>
    <nav>
     <div class="logo">My Profile</div>
-    <button class="menu-toggle" id="menuToggle" aria-label="Menu">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contacts">Contact</a></li>
+    </ul>
+    <button class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
     </button>
-    <div class="nav-container" id="navContainer">
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contacts">Contact</a></li>
-        </ul>
-    </div>
-</nav>
-    
+</nav> 
 
     <section id="home" class="hero">
         <div id="hero-content">
@@ -397,22 +394,37 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+
+// Project card flip functionality
 document.addEventListener('DOMContentLoaded', function() {
-    const menuToggle = document.getElementById('menuToggle');
-    const navLinks = document.getElementById('navLinks');
+    const projectCards = document.querySelectorAll('.project-card');
     
-    menuToggle.addEventListener('click', function() {
-        this.classList.toggle('active');
-        navLinks.classList.toggle('active');
-    });
+    // Check if mobile device
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
     
-    // Close menu when clicking links (mobile only)
-    if (window.innerWidth <= 768) {
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', function() {
-                menuToggle.classList.remove('active');
-                navLinks.classList.remove('active');
+    if (isMobile) {
+        projectCards.forEach(card => {
+            card.addEventListener('click', function(e) {
+                // Don't flip if clicking on a link
+                if (e.target.tagName === 'A') return;
+                
+                const inner = this.querySelector('.card-inner');
+                // Close other open cards first
+                document.querySelectorAll('.card-inner.flipped').forEach(openCard => {
+                    if (openCard !== inner) openCard.classList.remove('flipped');
+                });
+                // Toggle current card
+                inner.classList.toggle('flipped');
             });
+        });
+        
+        // Close card when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.project-card')) {
+                document.querySelectorAll('.card-inner.flipped').forEach(card => {
+                    card.classList.remove('flipped');
+                });
+            }
         });
     }
 });
