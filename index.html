@@ -366,32 +366,33 @@
 
 
 <script>
- // Mobile flip functionality
-document.addEventListener('DOMContentLoaded', function() {
-  const projectCards = document.querySelectorAll('.project-card');
-  const isMobile = window.matchMedia("(max-width: 768px)").matches;
-  
-  if (isMobile) {
-    projectCards.forEach(card => {
-      card.addEventListener('click', function() {
-        // Close other open cards first
-        document.querySelectorAll('.card-inner.flipped').forEach(openCard => {
-          if (openCard !== this.querySelector('.card-inner')) {
-            openCard.classList.remove('flipped');
+document.addEventListener('DOMContentLoaded', function () {
+  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+  if (isTouchDevice) {
+    document.querySelectorAll('.project-card').forEach(card => {
+      const innerCard = card.querySelector('.card-inner');
+
+      card.addEventListener('click', function (e) {
+        e.stopPropagation();
+
+        // Close other flipped cards
+        document.querySelectorAll('.card-inner.flipped').forEach(otherCard => {
+          if (otherCard !== innerCard) {
+            otherCard.classList.remove('flipped');
           }
         });
-        // Toggle current card
-        this.querySelector('.card-inner').classList.toggle('flipped');
+
+        // Flip this card
+        innerCard.classList.toggle('flipped');
       });
     });
-    
-    // Close card when clicking outside
-    document.addEventListener('click', function(e) {
-      if (!e.target.closest('.project-card')) {
-        document.querySelectorAll('.card-inner.flipped').forEach(card => {
-          card.classList.remove('flipped');
-        });
-      }
+
+    // Tap outside to close
+    document.body.addEventListener('click', function () {
+      document.querySelectorAll('.card-inner.flipped').forEach(card => {
+        card.classList.remove('flipped');
+      });
     });
   }
 });

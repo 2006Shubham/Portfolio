@@ -1046,3 +1046,14 @@ nav {
     transform: rotateY(180deg);
   }
 }
+
+/* Global mobile flip fix */
+.card-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+@media (hover: none) {
+  .project-card:hover .card-inner {
+    transform: none;
+  }
+}
