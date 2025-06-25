@@ -355,7 +355,7 @@
   flex-wrap: wrap;
 }
 
-.card-back a {
+.card-back a { 
   padding: 8px 15px;
   background: #C221ED;
   color: #134E4A;
@@ -407,4 +407,10 @@
     /* Flipped class toggled by JS */
     .card-inner.flipped {
       transform: rotateY(180deg);
+    }
+
+    @media(max-width:364px){
+      .pedinfo{
+        font-size: 1.2rem;
+      }
     }
