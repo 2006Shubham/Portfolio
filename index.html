@@ -39,10 +39,10 @@
     </nav>
 
 
-    <section id="home" class="pt-64 pb-32 sm:pt-9">
+    <section id="home" class="pt-32 pb-32 sm:pt-9">
         <div class="flex flex-col md:flex-row gap-10 md:gap-20 p-5 md:p-20 items-center">
             <img src="/images/mypic.jpg" alt="my photo" class="w-40 sm:w-52 md:w-64 rounded-full">
-            <div class="name-tagline flex flex-col gap-4 text-center md:text-left">
+            <div class="name-tagline flex flex-col gap-6 text-center sm:text-left">
                 <h1 class="italic font-black text-3xl sm:text-4xl md:text-5xl">
                     Hi, I am Shubham Santosh Deshmukh
                 </h1>
@@ -61,7 +61,7 @@
 
 
 
-    <section id="about" class="pt-16   about-content border-4">
+    <section id="about" class="pt-24 about-content border-4">
         <h2 class="font-semibold text-5xl pl-8 block text-yellow-600">About</h2>
         <div class="details pt-4">
             <div id="personal-education ">
@@ -319,9 +319,28 @@
 
     <script>
 
-        document.getElementById('menuToggle').addEventListener('click', () => {
-            document.getElementById('navLinks').classList.toggle('hidden');
+        // document.getElementById('menuToggle').addEventListener('click', () => {
+        //     document.getElementById('navLinks').classList.toggle('hidden');
+        // });
+
+
+        const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    const links = navLinks.querySelectorAll('a');
+
+    // Toggle button functionality
+    menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('hidden');
+    });
+
+    // Close menu on link click (only for small devices)
+    links.forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth < 768) { // Tailwind md breakpoint
+                navLinks.classList.add('hidden');
+            }
         });
+    });
 
 
         document.addEventListener("DOMContentLoaded", () => {
