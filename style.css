@@ -414,3 +414,25 @@
         font-size: 1.2rem;
       }
     }
+
+
+    /* typing effect on the name */
+
+#typing::after {
+  content: '';
+  display: inline-block;
+  width: 3px;
+  height: 1em;
+  background-color: #c221ed;  /* Cursor color */
+  margin-left: 2px;
+  animation: blink 0.7s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.typing-complete::after {
+  display: none;
+}
+

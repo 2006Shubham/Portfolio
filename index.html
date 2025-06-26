@@ -10,7 +10,7 @@
     </link>
 </head>
 
-<body>
+<body class="bg-[#F5F5f5]">
     <!-- <nav class="z-40 bg-[#d4d2d6] w-full fixed flex items-center justify-around h-8 border-b-2">
         <div class="text-[#c221ed] font-bold">Shubham2006/</div>
         <div class="font-semibold">
@@ -43,8 +43,8 @@
         <div class="flex flex-col md:flex-row gap-10 md:gap-20 p-5 md:p-20 items-center">
             <img src="/images/mypic.jpg" alt="my photo" class="w-40 sm:w-52 md:w-64 rounded-full">
             <div class="name-tagline flex flex-col gap-6 text-center sm:text-left">
-                <h1 class="italic font-black text-3xl sm:text-4xl md:text-5xl">
-                    Hi, I am Shubham Santosh Deshmukh
+                <h1 id="typing" class="italic font-black text-3xl sm:text-4xl md:text-5xl text-purple-500">
+                   <span class="text-[#CA8A04]">Hi, I am</span><br>
                 </h1>
                 <p class="italic text-sm sm:text-base">
                     A full stack web developer and the passionate tech architect who is always there
@@ -252,7 +252,7 @@
     </section>
 
     <section id="contacts" class="mt-8">
-        <footer id="con-footer" class="bg-[#d4d2d6] pb-4" >
+        <footer id="con-footer" class="bg-[#d4d2d6] pb-4">
             <div class="p-16 bg-[#d4d2d6] pb-4 sm:p-32 sm:pb-8 sm:bg-[#d4d2d6]">
                 <div class="flex flex-col gap-8 sm:flex sm:flex-row sm:justify-evenly sm:gap-16">
                     <div class="foot-container flex">
@@ -308,13 +308,13 @@
             </div>
 
             <div
-            class="w-full text-[#FFFFFF] font-semibold bg-[#CA8A04] flex text-center  items-center mt-20 sm:flex sm:justify-center sm:items-center text-[#FFFFFF] font-semibold  sm:mt-20 sm:bg-[#CA8A04] ">
-            <p>© 2025 All Rights Reserved. Made with ❤️ by Shubham Deshmukh</p>
+                class="w-full text-[#FFFFFF] font-semibold bg-[#CA8A04] flex text-center  items-center mt-20 sm:flex sm:justify-center sm:items-center text-[#FFFFFF] font-semibold  sm:mt-20 sm:bg-[#CA8A04] ">
+                <p>© 2025 All Rights Reserved. Made with ❤️ by Shubham Deshmukh</p>
             </div>
 
         </footer>
 
-       
+
     </section>
 
     <script>
@@ -325,22 +325,22 @@
 
 
         const menuToggle = document.getElementById('menuToggle');
-    const navLinks = document.getElementById('navLinks');
-    const links = navLinks.querySelectorAll('a');
+        const navLinks = document.getElementById('navLinks');
+        const links = navLinks.querySelectorAll('a');
 
-    // Toggle button functionality
-    menuToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('hidden');
-    });
-
-    // Close menu on link click (only for small devices)
-    links.forEach(link => {
-        link.addEventListener('click', () => {
-            if (window.innerWidth < 768) { // Tailwind md breakpoint
-                navLinks.classList.add('hidden');
-            }
+        // Toggle button functionality
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('hidden');
         });
-    });
+
+        // Close menu on link click (only for small devices)
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 768) { // Tailwind md breakpoint
+                    navLinks.classList.add('hidden');
+                }
+            });
+        });
 
 
         document.addEventListener("DOMContentLoaded", () => {
@@ -378,6 +378,26 @@
                 });
             }
         });
+
+
+
+        const text = "Shubham Santosh Deshmukh";
+        const typingEl = document.getElementById("typing");
+        let index = 0;
+
+        function typeChar() {
+            if (index < text.length) {
+                typingEl.innerHTML += text.charAt(index);
+                index++;
+                setTimeout(typeChar, 100); // typing speed (ms)
+            } else {
+                typingEl.style.borderRight = 'none'; // remove cursor after typing
+            }
+        }
+
+        typeChar();
+
+
     </script>
 </body>
 
