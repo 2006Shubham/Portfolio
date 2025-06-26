@@ -442,3 +442,29 @@
   display: none;
 }
 
+/* river animation */
+
+.river-container {
+  background: linear-gradient(to right, #3b82f6 0%, #2563eb 100%);
+  border-top: 4px solid #1e40af;
+  border-bottom: 4px solid #1e40af;
+}
+
+.river-stream {
+  animation: river-flow 20s linear infinite;
+}
+
+@keyframes river-flow {
+  0% { transform: translateX(0); }
+  100% { transform: translateX( -50% ); } /* adjust based on repeat width */
+}
+
+.float-item {
+  padding: 4px 12px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  white-space: nowrap;
+  font-weight: bold;
+  color: #facc15; /* yellow text */
+  box-shadow: 0 0 5px #facc15;
+}

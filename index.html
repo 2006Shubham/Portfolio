@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
@@ -31,20 +31,24 @@
         <button id="menuToggle" class="md:hidden text-[#c221ed] text-3xl">☰</button>
         <ul id="navLinks"
             class="hidden flex-col absolute top-12 left-0 w-full bg-[#e6dee0] md:flex md:flex-row md:static md:w-auto md:gap-8 text-yellow-600 font-semibold">
-            <li><a href="#home" class="block p-2">Home</a></li>
-            <li><a href="#about" class="block p-2">About</a></li>
-            <li><a href="#projects" class="block p-2">Projects</a></li>
-            <li><a href="#contacts" class="block p-2">Contact</a></li>
+            <li><a href="#home" class="page-link block p-2 underline decoration-purple-500 decoration-4">Home</a></li>
+            <li><a href="#about" class="page-link block p-2">About</a></li>
+            <li><a href="#projects" class="page-link block p-2 underline-offset-4">Projects</a></li>
+            <li><a href="#contacts" class="page-link block p-2">Contact</a></li>
         </ul>
     </nav>
 
 
-    <section id="home" class="pt-28 pb-32 sm:pt-9">
-        <div class="flex flex-col md:flex-row gap-10 md:gap-20 p-5 md:p-20 items-center">
+
+    <section id="home" class="pt-28 pb-32 sm:pt-9 relative group rounded-full transition duration-700 ease-out">
+        <canvas id="confetti-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-50 "></canvas>
+
+        <div class="flex flex-col md:flex-row gap-10 md:gap-20 p-5 md:p-20 
+        items-center">
             <img src="/images/mypic.jpg" alt="my photo" class="w-40 sm:w-52 md:w-64 rounded-full">
             <div class="name-tagline flex flex-col gap-6 text-center sm:text-left">
                 <h1 id="typing" class="italic font-black text-3xl sm:text-4xl md:text-5xl text-purple-500">
-                   <span class="text-[#CA8A04]">Hi, I am</span><br>
+                    <span class="text-[#CA8A04]">Hi, I am</span><br>
                 </h1>
                 <p class="italic text-[#CF259D] sm:text-[#F97316] font-medium text-sm sm:text-base">
                     A full stack web developer and the passionate tech architect who is always there
@@ -56,6 +60,10 @@
                     <a class="text-sm bg-[#ea78f0] p-2 rounded">Download CV</a>
                 </div>
             </div>
+        </div>
+
+        <div
+            class="absolute inset-0 rounded-full bg-yellow-50 opacity-0 group-hover:opacity-40  transition duration-700 ease-out pointer-events-none">
         </div>
     </section>
 
@@ -95,7 +103,8 @@
         </div>
 
         <div class="skills-wrapper">
-            <h3 id="skillqul" class="pl-8 font-medium text-[#c221ed] text-2xl  ms:font-medium ms:text-[#c221ed] ms:text-2xl sm:pl-16">
+            <h3 id="skillqul"
+                class="pl-8 font-medium text-[#c221ed] text-2xl  ms:font-medium ms:text-[#c221ed] ms:text-2xl sm:pl-16">
                 My Skills Set</h3>
             <div class="grid pt-8 grid-cols-2 gap-8 sm:pl-16 p-7 sm-4 sm:grid sm:grid-cols-4 sm:gap-8 sm:p-16">
                 <div class="flex items-center gap-4">
@@ -148,7 +157,7 @@
 
 
         <div class="qulity-wrapper">
-            <h1  id="skillqul"
+            <h1 id="skillqul"
                 class="pl-8 font-medium text-[#c221ed] text-2xl pt-4  ms:font-medium ms:text-[#c221ed] ms:text-2xl sm:pl-16">
                 Qualities/Strength</h1>
             <div class="grid grid-cols-1 gap-4 p-8 sm:grid sm:grid-cols-2  sm:gap-8 sm:pl-16">
@@ -160,7 +169,8 @@
                     <div class="quality"><img src="images/qualities/leader.png" class="skill-qulity w-8 sm:w-12">
                         <p>Leadership ability</p>
                     </div>
-                    <div class="quality"><img src="images/qualities/communication .png" class="skill-qulity w-8 sm:w-12">
+                    <div class="quality"><img src="images/qualities/communication .png"
+                            class="skill-qulity w-8 sm:w-12">
                         <p>Effective Communication</p>
                     </div>
                     <div class="quality"><img src="images/qualities/presentation .png" class="skill-qulity w-8 sm:w-12">
@@ -306,11 +316,14 @@
                 </div>
 
             </div>
+            <canvas id="riverCanvas" class="w-full h-24 block"></canvas>
 
             <div
                 class="w-full text-[#FFFFFF] font-semibold bg-[#CA8A04] flex text-center  items-center mt-20 sm:flex sm:justify-center sm:items-center text-[#FFFFFF] font-semibold  sm:mt-20 sm:bg-[#CA8A04] ">
                 <p>© 2025 All Rights Reserved. Made with ❤️ by Shubham Deshmukh</p>
             </div>
+
+
 
         </footer>
 
@@ -399,6 +412,123 @@
 
 
     </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/confetti-js@0.0.18/dist/index.min.js"></script>
+    <script>
+        const confettiSettings = {
+            target: 'confetti-canvas',
+            max: 150,
+            size: 1.2,
+            animate: true,
+            props: ['circle', 'square', 'triangle', 'line'],
+            colors: [[246, 189, 22], [194, 33, 237], [255, 255, 255]],
+            clock: 25,
+            rotate: true
+        };
+        const confetti = new ConfettiGenerator(confettiSettings);
+        confetti.render();
+
+        // Smooth stop logic
+        let clockSpeed = 25;
+        setTimeout(() => {
+            const slowDown = setInterval(() => {
+                clockSpeed -= 1;
+                confettiSettings.clock = clockSpeed;
+                confetti.clear(); // stop current
+                confetti.render(); // re-render with new slower speed
+
+                if (clockSpeed <= 0) {
+                    clearInterval(slowDown);
+                    confetti.clear(); // final clear
+                    document.getElementById("confetti-canvas").remove(); // remove canvas
+                }
+            }, 100); // slow down every 100ms
+        }, 5000); // after 5 sec, start slowing
+
+    </script>
+
+    <script>
+        const canvas = document.getElementById('riverCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = 100;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        let waveOffset = 0;
+        const tools = [
+            { name: "HTML", x: 50 },
+            { name: "CSS", x: 200 },
+            { name: "JS", x: 350 },
+            { name: "React", x: 500 },
+            { name: "Node", x: 650 },
+            { name: "Tailwind", x: 800 }
+        ];
+
+        function drawRiver() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw river
+            ctx.beginPath();
+            ctx.moveTo(0, 60);
+            for (let x = 0; x <= canvas.width; x++) {
+                ctx.lineTo(x, 60 + 10 * Math.sin((x + waveOffset) * 0.02));
+            }
+            ctx.lineTo(canvas.width, canvas.height);
+            ctx.lineTo(0, canvas.height);
+            ctx.closePath();
+            ctx.fillStyle = '#3b82f6';
+            ctx.fill();
+
+            // Draw tools
+            ctx.font = "bold 18px sans-serif";
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = "#000";  // Black outline
+            ctx.fillStyle = "#FACC15"; // Yellow text
+            ctx.shadowColor = "rgba(0,0,0,0.3)";
+            ctx.shadowBlur = 3;
+
+            tools.forEach(tool => {
+                const waveY = 60 + 10 * Math.sin((tool.x + waveOffset) * 0.02);
+                const y = waveY + 5;
+
+                ctx.strokeText(tool.name, tool.x, y); // Black border
+                ctx.fillText(tool.name, tool.x, y);   // Yellow fill
+
+                tool.x += 1;
+                if (tool.x > canvas.width + 50) {
+                    tool.x = -50;
+                }
+            });
+
+            waveOffset += 2;
+            requestAnimationFrame(drawRiver);
+        }
+
+        drawRiver();
+    </script>
+
+    <script>
+  const navLink = document.querySelectorAll(".page-link");
+
+  navLink.forEach(link => {
+    link.addEventListener("click", function () {
+      // Remove underline from all links
+      navLink.forEach(l => l.classList.remove("underline", "decoration-purple-500"));
+      
+      // Add underline to clicked link
+      this.classList.add("underline", "decoration-purple-500","decoration-4");
+    });
+  });
+</script>
+
+
+
+
 </body>
 
 </html>
